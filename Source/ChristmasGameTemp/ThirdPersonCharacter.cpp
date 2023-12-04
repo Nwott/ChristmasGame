@@ -3,7 +3,7 @@
 
 #include "ThirdPersonCharacter.h"
 #include "Kismet/GameplayStatics.h"
-#include "Engine/World.h"
+#include "Sleigh.h"
 
 // Sets default values
 AThirdPersonCharacter::AThirdPersonCharacter()
@@ -24,8 +24,6 @@ void AThirdPersonCharacter::BeginPlay()
 void AThirdPersonCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	PossessSleigh();
-
 }
 
 // Called to bind functionality to input
@@ -40,11 +38,16 @@ void AThirdPersonCharacter::PossessSleigh()
 	// get controller
 	APlayerController* controller = (APlayerController*)GetController();
 
-	if (controller->WasInputKeyJustPressed(EKeys::E))
+	TArray<AActor*> actors;
+	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ASleigh::StaticClass(), actors);
+
+	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, FString::Printf(TEXT("%f = FloatVariable"), actors.Num()));
+
+	for (AActor* actor : actors)
 	{
-		
+		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Your Message"));
+		controller->Possess((APawn*)actor);
 	}
-	
 }
 
 

@@ -4,26 +4,22 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
-#include "ThirdPersonCharacter.generated.h"
+#include "Sleigh.generated.h"
 
 UCLASS()
-class CHRISTMASGAMETEMP_API AThirdPersonCharacter : public ACharacter
+class CHRISTMASGAMETEMP_API ASleigh : public ACharacter
 {
 	GENERATED_BODY()
 
 public:
 	// Sets default values for this character's properties
-	AThirdPersonCharacter();
+	ASleigh();
 
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-	// Possesses sleigh
-	UFUNCTION(BlueprintCallable, Category="Sleigh")
-	void PossessSleigh();
-
-public:
+public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
