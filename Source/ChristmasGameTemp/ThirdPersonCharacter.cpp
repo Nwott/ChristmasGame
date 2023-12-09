@@ -41,11 +41,8 @@ void AThirdPersonCharacter::PossessSleigh()
 	TArray<AActor*> actors;
 	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ASleigh::StaticClass(), actors);
 
-	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, FString::Printf(TEXT("%f = FloatVariable"), actors.Num()));
-
 	for (AActor* actor : actors)
 	{
-		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Your Message"));
 		controller->Possess((APawn*)actor);
 	}
 }

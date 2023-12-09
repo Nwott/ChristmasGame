@@ -2,6 +2,8 @@
 
 
 #include "Sleigh.h"
+#include "Kismet/GameplayStatics.h"
+#include "ThirdPersonCharacter.h"
 
 // Sets default values
 ASleigh::ASleigh()
@@ -32,3 +34,19 @@ void ASleigh::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
 }
 
+void ASleigh::OnPlayerExit()
+{
+	// get controller
+	APlayerController* controller = (APlayerController*)GetController();
+
+	controller->UnPossess();
+
+	// find player
+	TArray<AActor*> actors;
+	UGameplayStatics::GetAllActorsOfClass(GetWorld(), AThirdPersonCharacter::StaticClass(), actors);
+
+	for (AActor* actor : actors)
+	{
+		controller->Possess((APawn*)actor);
+	}
+}
