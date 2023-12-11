@@ -15,6 +15,12 @@ public:
 	// Sets default values for this character's properties
 	AThirdPersonCharacter();
 
+	UFUNCTION(BlueprintCallable, Category="Sleigh")
+	void OnExitSleigh();
+
+	bool GetInSleigh();
+	void SetInSleigh(bool inSleigh);
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -22,6 +28,14 @@ protected:
 	// Possesses sleigh
 	UFUNCTION(BlueprintCallable, Category="Sleigh")
 	void PossessSleigh();
+
+	void InitializeVariables();
+
+	UPROPERTY(BlueprintReadOnly, Category="Sleigh")
+	APlayerController* playerController;
+
+	bool inSleigh;
+
 
 public:
 	// Called every frame

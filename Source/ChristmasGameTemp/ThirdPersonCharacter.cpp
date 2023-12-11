@@ -5,10 +5,21 @@
 #include "Kismet/GameplayStatics.h"
 #include "Sleigh.h"
 
+// getters
+bool AThirdPersonCharacter::GetInSleigh()
+{
+	return inSleigh;
+}
+
+void AThirdPersonCharacter::SetInSleigh(bool inSleigh)
+{
+	this->inSleigh = inSleigh;
+}
+
 // Sets default values
 AThirdPersonCharacter::AThirdPersonCharacter()
 {
- 	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
+	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
 }
@@ -17,7 +28,7 @@ AThirdPersonCharacter::AThirdPersonCharacter()
 void AThirdPersonCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-	
+	InitializeVariables();
 }
 
 // Called every frame
@@ -33,18 +44,49 @@ void AThirdPersonCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInp
 
 }
 
-void AThirdPersonCharacter::PossessSleigh()
+void AThirdPersonCharacter::InitializeVariables()
 {
 	// get controller
-	APlayerController* controller = (APlayerController*)GetController();
+	playerController = (APlayerController*)GetController();
+}
 
+void AThirdPersonCharacter::PossessSleigh()
+{
+	if (inSleigh) return;
+
+	// get all actors of type sleigh
 	TArray<AActor*> actors;
 	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ASleigh::StaticClass(), actors);
 
-	for (AActor* actor : actors)
-	{
-		controller->Possess((APawn*)actor);
-	}
+	// get first actor which is the only sleigh in the game
+	AActor* actor = actors[0];
+	ASleigh* sleigh = (ASleigh*)actor;
+
+	FVector playerPosition = sleigh->playerPosition;
+	FRotator sleighRotation = sleigh->GetActorRotation();
+
+	// teleport player to playerPosition in sleigh
+	Super::TeleportTo(playerPosition, sleighRotation);
+
+	playerController->Possess((APawn*)actor);
+
+	// disable collision for player so it doesnt collide while inside sleigh
+	Super::SetActorEnableCollision(false);
+
+
+	// attach player to sleigh
+	// similar to setting transform.parent in unity
+	Super::AttachToActor(actor, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
+
+	SetInSleigh(true);
 }
+
+void AThirdPersonCharacter::OnExitSleigh()
+{
+	// re-enable collision for player
+	Super::SetActorEnableCollision(true);
+}
+
+
 
 

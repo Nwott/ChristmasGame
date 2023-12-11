@@ -17,7 +17,7 @@ ASleigh::ASleigh()
 void ASleigh::BeginPlay()
 {
 	Super::BeginPlay();
-	
+	InitializeVariables();
 }
 
 // Called every frame
@@ -34,19 +34,24 @@ void ASleigh::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
 }
 
-void ASleigh::OnPlayerExit()
+void ASleigh::InitializeVariables()
 {
-	// get controller
-	APlayerController* controller = (APlayerController*)GetController();
-
-	controller->UnPossess();
-
-	// find player
 	TArray<AActor*> actors;
 	UGameplayStatics::GetAllActorsOfClass(GetWorld(), AThirdPersonCharacter::StaticClass(), actors);
+	player = (AThirdPersonCharacter*)actors[0];
+	playerController = (APlayerController*)GetController();
+}
 
-	for (AActor* actor : actors)
-	{
-		controller->Possess((APawn*)actor);
-	}
+void ASleigh::OnPlayerExit()
+{
+	// if player is not in sleigh, then dont run this method
+	if (!player->GetInSleigh()) return;
+
+	playerController->UnPossess();
+
+	// detach player from sleigh
+	Super::DetachFromActor(FDetachmentTransformRules::KeepRelativeTransform);
+	player->OnExitSleigh();
+	playerController->Possess((APawn*)player);
+	player->SetInSleigh(false);
 }
