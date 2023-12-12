@@ -46,9 +46,6 @@ void ASleigh::OnPlayerExit()
 	// if player is not in sleigh, then dont run this method
 	if (!player->GetInSleigh()) return;
 
-	// detach player from sleigh
-	//Super::DetachFromActor(FDetachmentTransformRules::KeepRelativeTransform);
-
 	player->OnExitSleigh();
 	player->SetInSleigh(false);
 }

@@ -76,7 +76,7 @@ void AThirdPersonCharacter::PossessSleigh()
 
 	// attach player to sleigh
 	// similar to setting transform.parent in unity
-	//Super::AttachToActor(actor, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
+	Super::AttachToActor(actor, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
 
 	SetInSleigh(true);
 }
@@ -85,6 +85,9 @@ void AThirdPersonCharacter::OnExitSleigh()
 {
 	// re-enable collision for player
 	Super::SetActorEnableCollision(true);
+
+	// detach player from sleigh
+	Super::DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
 
 	playerController->UnPossess();
 	playerController->Possess((APawn*)this);
