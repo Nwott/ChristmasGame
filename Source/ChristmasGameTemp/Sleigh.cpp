@@ -39,7 +39,6 @@ void ASleigh::InitializeVariables()
 	TArray<AActor*> actors;
 	UGameplayStatics::GetAllActorsOfClass(GetWorld(), AThirdPersonCharacter::StaticClass(), actors);
 	player = (AThirdPersonCharacter*)actors[0];
-	playerController = (APlayerController*)GetController();
 }
 
 void ASleigh::OnPlayerExit()
@@ -47,11 +46,9 @@ void ASleigh::OnPlayerExit()
 	// if player is not in sleigh, then dont run this method
 	if (!player->GetInSleigh()) return;
 
-	playerController->UnPossess();
-
 	// detach player from sleigh
-	Super::DetachFromActor(FDetachmentTransformRules::KeepRelativeTransform);
+	//Super::DetachFromActor(FDetachmentTransformRules::KeepRelativeTransform);
+
 	player->OnExitSleigh();
-	playerController->Possess((APawn*)player);
 	player->SetInSleigh(false);
 }

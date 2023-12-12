@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "ThirdPersonCharacter.h"
 #include "Sleigh.generated.h"
 
 UCLASS()
@@ -28,8 +29,8 @@ protected:
 	UFUNCTION(BlueprintCallable, Category="Sleigh")
 	virtual void OnPlayerExit();
 
+	UPROPERTY(BlueprintReadOnly, Category="Sleigh")
 	AThirdPersonCharacter* player;
-	APlayerController* playerController;
 
 public:	
 	// Called every frame

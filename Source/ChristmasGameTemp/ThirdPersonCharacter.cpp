@@ -11,9 +11,9 @@ bool AThirdPersonCharacter::GetInSleigh()
 	return inSleigh;
 }
 
-void AThirdPersonCharacter::SetInSleigh(bool inSleigh)
+void AThirdPersonCharacter::SetInSleigh(bool in)
 {
-	this->inSleigh = inSleigh;
+	inSleigh = in;
 }
 
 // Sets default values
@@ -76,7 +76,7 @@ void AThirdPersonCharacter::PossessSleigh()
 
 	// attach player to sleigh
 	// similar to setting transform.parent in unity
-	Super::AttachToActor(actor, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
+	//Super::AttachToActor(actor, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
 
 	SetInSleigh(true);
 }
@@ -85,6 +85,9 @@ void AThirdPersonCharacter::OnExitSleigh()
 {
 	// re-enable collision for player
 	Super::SetActorEnableCollision(true);
+
+	playerController->UnPossess();
+	playerController->Possess((APawn*)this);
 }
 
 

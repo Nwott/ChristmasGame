@@ -19,7 +19,7 @@ public:
 	void OnExitSleigh();
 
 	bool GetInSleigh();
-	void SetInSleigh(bool inSleigh);
+	void SetInSleigh(bool in);
 
 protected:
 	// Called when the game starts or when spawned
