@@ -96,8 +96,8 @@ void AThirdPersonCharacter::OnExitSleigh()
 
 void AThirdPersonCharacter::GetPresent()
 {
-	const FVector playerPosition = Super::GetActorLocation();
-	const FVector position = *(new FVector(playerPosition.X, playerPosition.Y, 105));
+	UStaticMeshComponent* presentLocation = this->FindComponentByTag<UStaticMeshComponent>("PresentLocation");
+	const FVector position = presentLocation->GetComponentLocation();
 	GetWorld()->SpawnActor<APresent>(presentToSpawn, position, FRotator::ZeroRotator);
 }
 
