@@ -123,7 +123,11 @@ void AThirdPersonCharacter::DropPresent()
 {
 	if (currPresent == NULL) return;
 
+	UStaticMeshComponent* presentMesh = currPresent->FindComponentByTag<UStaticMeshComponent>("PresentMesh");
+
+	// detach currPresent
 	currPresent->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
+	presentMesh->SetSimulatePhysics(true);
 	currPresent = NULL;
 }
 
