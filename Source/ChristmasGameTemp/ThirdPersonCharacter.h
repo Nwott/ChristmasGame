@@ -36,6 +36,11 @@ protected:
 
 	bool inSleigh;
 
+	UFUNCTION(BlueprintCallable, Category="Sleigh")
+	void GetPresent();
+
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<class APresent> presentToSpawn;
 
 public:
 	// Called every frame

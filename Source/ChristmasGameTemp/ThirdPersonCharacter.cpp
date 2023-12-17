@@ -4,6 +4,7 @@
 #include "ThirdPersonCharacter.h"
 #include "Kismet/GameplayStatics.h"
 #include "Sleigh.h"
+#include "Present.h"
 
 // getters
 bool AThirdPersonCharacter::GetInSleigh()
@@ -93,6 +94,11 @@ void AThirdPersonCharacter::OnExitSleigh()
 	playerController->Possess((APawn*)this);
 }
 
-
+void AThirdPersonCharacter::GetPresent()
+{
+	const FVector playerPosition = Super::GetActorLocation();
+	const FVector position = *(new FVector(playerPosition.X, playerPosition.Y, 105));
+	GetWorld()->SpawnActor<APresent>(presentToSpawn, position, FRotator::ZeroRotator);
+}
 
 
