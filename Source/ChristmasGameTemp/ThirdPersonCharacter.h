@@ -21,6 +21,9 @@ public:
 	bool GetInSleigh();
 	void SetInSleigh(bool in);
 
+	bool GetInPickupRange();
+	void SetInPickupRange(bool in);
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -46,6 +49,9 @@ protected:
 	void OnPressInteract();
 
 	APresent* currPresent;
+
+	// is player in range of the sleigh present pickup location?
+	bool inPickupRange;
 
 public:
 	// Called every frame

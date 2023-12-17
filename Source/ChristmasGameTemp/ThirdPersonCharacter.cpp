@@ -6,7 +6,7 @@
 #include "Sleigh.h"
 #include "Present.h"
 
-// getters
+// getters and setters
 bool AThirdPersonCharacter::GetInSleigh()
 {
 	return inSleigh;
@@ -16,6 +16,17 @@ void AThirdPersonCharacter::SetInSleigh(bool in)
 {
 	inSleigh = in;
 }
+
+bool AThirdPersonCharacter::GetInPickupRange()
+{
+	return inPickupRange;
+}
+
+void AThirdPersonCharacter::SetInPickupRange(bool in)
+{
+	inPickupRange = in;
+}
+
 
 // Sets default values
 AThirdPersonCharacter::AThirdPersonCharacter()

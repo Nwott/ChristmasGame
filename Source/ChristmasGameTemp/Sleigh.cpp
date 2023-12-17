@@ -49,3 +49,36 @@ void ASleigh::OnPlayerExit()
 	player->OnExitSleigh();
 	player->SetInSleigh(false);
 }
+
+void ASleigh::OnPlayerPresentPickupEnter(AActor* actor)
+{
+	if (IsPlayer(actor))
+	{
+		player->SetInPickupRange(true);
+		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Entered"));
+	}
+}
+
+void ASleigh::OnPlayerPresentPickupLeave(AActor* actor)
+{
+	if (IsPlayer(actor))
+	{
+		player->SetInPickupRange(false);
+		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Left"));
+	}
+}
+
+bool ASleigh::IsPlayer(AActor* actor)
+{
+	UClass* actorClass = actor->GetClass();
+
+	// check if colliding actor is the player
+	if (actorClass->IsChildOf(AThirdPersonCharacter::StaticClass()))
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}

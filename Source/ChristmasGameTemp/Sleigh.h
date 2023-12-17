@@ -32,6 +32,14 @@ protected:
 	UPROPERTY(BlueprintReadOnly, Category="Sleigh")
 	AThirdPersonCharacter* player;
 
+	UFUNCTION(BlueprintCallable, Category="Sleigh")
+	void OnPlayerPresentPickupEnter(AActor* actor);
+
+	UFUNCTION(BlueprintCallable, Category="Sleigh")
+	void OnPlayerPresentPickupLeave(AActor* actor);
+
+	bool IsPlayer(AActor* actor);
+
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
