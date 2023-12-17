@@ -96,9 +96,14 @@ void AThirdPersonCharacter::OnExitSleigh()
 
 void AThirdPersonCharacter::GetPresent()
 {
+	// get present location component position from thirdpersonplayer blueprint
 	UStaticMeshComponent* presentLocation = this->FindComponentByTag<UStaticMeshComponent>("PresentLocation");
 	const FVector position = presentLocation->GetComponentLocation();
-	GetWorld()->SpawnActor<APresent>(presentToSpawn, position, FRotator::ZeroRotator);
+
+	// spawn present at position
+	APresent* present = GetWorld()->SpawnActor<APresent>(presentToSpawn, position, FRotator::ZeroRotator);
+
+	present->AttachToActor(this, FAttachmentTransformRules::KeepWorldTransform);
 }
 
 
