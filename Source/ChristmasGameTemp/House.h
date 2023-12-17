@@ -23,6 +23,10 @@ protected:
 	UFUNCTION(BlueprintCallable, Category="House")
 	void OnPlayerColliderOverlap(AActor* otherActor);
 
+	int totalPresents;
+
+	int presents;
+
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
