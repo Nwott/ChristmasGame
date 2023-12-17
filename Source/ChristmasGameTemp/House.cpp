@@ -2,6 +2,7 @@
 
 
 #include "House.h"
+#include "ThirdPersonCharacter.h"
 
 // Sets default values
 AHouse::AHouse()
@@ -27,5 +28,10 @@ void AHouse::Tick(float DeltaTime)
 
 void AHouse::OnPlayerColliderOverlap(AActor* otherActor)
 {
-	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Your Message"));
+	UClass* actorClass = otherActor->GetClass();
+
+	// check if actor collided with is the player
+	if (actorClass->IsChildOf(AThirdPersonCharacter::StaticClass()))
+	{
+	}
 }
