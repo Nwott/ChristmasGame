@@ -36,8 +36,8 @@ protected:
 
 	bool inSleigh;
 
-	UFUNCTION(BlueprintCallable, Category="Sleigh")
 	void GetPresent();
+	void DropPresent();
 
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<class APresent> presentToSpawn;

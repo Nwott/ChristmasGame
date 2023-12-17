@@ -100,6 +100,10 @@ void AThirdPersonCharacter::OnPressInteract()
 	{
 		GetPresent();
 	}
+	else
+	{
+		DropPresent();
+	}
 }
 
 void AThirdPersonCharacter::GetPresent()
@@ -113,5 +117,13 @@ void AThirdPersonCharacter::GetPresent()
 
 	present->AttachToActor(this, FAttachmentTransformRules::KeepWorldTransform);
 	currPresent = present;
+}
+
+void AThirdPersonCharacter::DropPresent()
+{
+	if (currPresent == NULL) return;
+
+	currPresent->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
+	currPresent = NULL;
 }
 
