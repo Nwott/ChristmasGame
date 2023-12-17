@@ -42,6 +42,11 @@ protected:
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<class APresent> presentToSpawn;
 
+	UFUNCTION(BlueprintCallable, Category="Sleigh")
+	void OnPressInteract();
+
+	APresent* currPresent;
+
 public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;

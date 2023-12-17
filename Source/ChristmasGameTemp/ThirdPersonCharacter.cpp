@@ -94,6 +94,14 @@ void AThirdPersonCharacter::OnExitSleigh()
 	playerController->Possess((APawn*)this);
 }
 
+void AThirdPersonCharacter::OnPressInteract()
+{
+	if (currPresent == NULL)
+	{
+		GetPresent();
+	}
+}
+
 void AThirdPersonCharacter::GetPresent()
 {
 	// get present location component position from thirdpersonplayer blueprint
@@ -104,6 +112,6 @@ void AThirdPersonCharacter::GetPresent()
 	APresent* present = GetWorld()->SpawnActor<APresent>(presentToSpawn, position, FRotator::ZeroRotator);
 
 	present->AttachToActor(this, FAttachmentTransformRules::KeepWorldTransform);
+	currPresent = present;
 }
-
 
