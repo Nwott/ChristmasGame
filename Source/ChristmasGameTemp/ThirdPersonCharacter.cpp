@@ -109,7 +109,15 @@ void AThirdPersonCharacter::OnPressInteract()
 {
 	if (currPresent == NULL)
 	{
-		GetPresent();
+		if (inPickupRange)
+		{
+			GetPresent();
+		}
+		else
+		{
+			TArray<APresent*> presents = CheckForPresents();
+			APresent* closestPresent = GetClosestPresent(presents);
+		}
 	}
 	else
 	{
@@ -168,7 +176,30 @@ TArray<APresent*> AThirdPersonCharacter::CheckForPresents()
 	return presents;
 }
 
-void AThirdPersonCharacter::PickupClosestPresent(TArray<APresent*> present)
+APresent* AThirdPersonCharacter::GetClosestPresent(TArray<APresent*> presents)
 {
+	// return if no presents
+	if (presents.Num() <= 0) return NULL;
 
+	APresent* closestPresent = presents[0];
+
+	// get distance between present at index 0 and player
+	float distance = (this->GetActorLocation() - closestPresent->GetActorLocation()).Size();
+
+	for (int i = 0; i < presents.Num(); i++)
+	{
+		// get position of present
+		APresent* present = presents[i];
+
+		// get distance between present and player
+		float presentDistance = (this->GetActorLocation() - closestPresent->GetActorLocation()).Size();
+
+		if (presentDistance < distance)
+		{
+			closestPresent = present;
+			distance = presentDistance;
+		}
+	}
+
+	return closestPresent;
 }

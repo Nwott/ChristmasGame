@@ -56,7 +56,7 @@ protected:
 	UFUNCTION(BlueprintCallable, Category="Present")
 	TArray<APresent*> CheckForPresents();
 
-	void PickupClosestPresent(TArray<APresent*>);
+	APresent* GetClosestPresent(TArray<APresent*>);
 
 public:
 	// Called every frame
