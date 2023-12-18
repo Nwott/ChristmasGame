@@ -53,6 +53,11 @@ protected:
 	// is player in range of the sleigh present pickup location?
 	bool inPickupRange;
 
+	UFUNCTION(BlueprintCallable, Category="Present")
+	TArray<APresent*> CheckForPresents();
+
+	void PickupClosestPresent(TArray<APresent*>);
+
 public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;

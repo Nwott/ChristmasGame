@@ -145,3 +145,30 @@ void AThirdPersonCharacter::DropPresent()
 	currPresent = NULL;
 }
 
+TArray<APresent*> AThirdPersonCharacter::CheckForPresents()
+{
+	TArray<APresent*> presents = *(new TArray<APresent*>());
+	// get all actors within the collider of player
+	TArray<AActor*> collidingActors = *(new TArray<AActor*>());
+	GetOverlappingActors(collidingActors);
+
+	for (int i = 0; i < collidingActors.Num(); i++)
+	{
+		// get class of actor
+		UClass* actorClass = collidingActors[i]->GetClass();
+
+		// check if actor is present
+		if (actorClass->IsChildOf(APresent::StaticClass()))
+		{
+			// add present to presents
+			presents.Add((APresent*)collidingActors[i]);
+		}
+	}
+
+	return presents;
+}
+
+void AThirdPersonCharacter::PickupClosestPresent(TArray<APresent*> present)
+{
+
+}
