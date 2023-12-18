@@ -3,6 +3,7 @@
 
 #include "House.h"
 #include "ThirdPersonCharacter.h"
+#include "Present.h"
 
 // Sets default values
 AHouse::AHouse()
@@ -38,4 +39,20 @@ void AHouse::OnPlayerColliderOverlap(AActor* otherActor)
 		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, FString::FromInt(totalPresents));
 		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, FString::FromInt(presents));
 	}
+}
+
+
+
+bool AHouse::IsPresent(AActor* actor)
+{
+	// get actor class
+	UClass* actorClass = actor->GetClass();
+
+	// check if actor is present
+	if (actorClass->IsChildOf(APresent::StaticClass()))
+	{
+		return true;
+	}
+
+	return false;
 }

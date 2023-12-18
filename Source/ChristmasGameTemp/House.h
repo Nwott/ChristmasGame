@@ -23,6 +23,14 @@ protected:
 	UFUNCTION(BlueprintCallable, Category="House")
 	void OnPlayerColliderOverlap(AActor* otherActor);
 
+	UFUNCTION(BlueprintCallable, Category="House")
+	void OnPresentColliderEnter(AActor* otherActor);
+
+	UFUNCTION(BlueprintCallable, Category="House")
+	void OnPresentColliderExit(AActor* otherActor);
+
+	bool IsPresent(AActor* actor);
+
 	int totalPresents;
 
 	int presents;
