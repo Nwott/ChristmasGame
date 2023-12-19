@@ -117,6 +117,11 @@ void AThirdPersonCharacter::OnPressInteract()
 		{
 			TArray<APresent*> presents = CheckForPresents();
 			APresent* closestPresent = GetClosestPresent(presents);
+
+			if (closestPresent != NULL)
+			{
+				PickupClosestPresent(closestPresent);
+			}
 		}
 	}
 	else
@@ -202,4 +207,16 @@ APresent* AThirdPersonCharacter::GetClosestPresent(TArray<APresent*> presents)
 	}
 
 	return closestPresent;
+}
+
+void AThirdPersonCharacter::PickupClosestPresent(APresent* present)
+{
+	// get present location
+	UStaticMeshComponent* presentLocation = this->FindComponentByTag<UStaticMeshComponent>("PresentLocation");
+	const FVector presentPosition = presentLocation->GetComponentLocation();
+
+	// move present to presentPosition
+	present->SetActorLocation(presentPosition);
+
+	present->AttachToActor(this, FAttachmentTransformRules::KeepWorldTransform);
 }
