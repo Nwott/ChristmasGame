@@ -9,7 +9,7 @@
 /**
  * 
  */
-UCLASS()
+UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class CHRISTMASGAMETEMP_API UCustomMovementComponent : public UMovementComponent
 {
 	GENERATED_BODY()
