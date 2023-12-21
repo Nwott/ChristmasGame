@@ -20,8 +20,7 @@ public:
 protected:
 	virtual void BeginPlay() override;
 
-	virtual void Move();
-
 public:
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
+	virtual void Move(FVector moveDelta);
 };

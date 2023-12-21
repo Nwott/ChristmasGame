@@ -28,13 +28,11 @@ void UCustomMovementComponent::BeginPlay()
 void UCustomMovementComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-
-	Move();
 }
 
-void UCustomMovementComponent::Move()
+void UCustomMovementComponent::Move(FVector moveDelta)
 {
-	const FVector& moveVector = *(new FVector(1, 0, 0));
+	const FVector& moveVector = moveDelta;
 	FHitResult& hitResult = *(new FHitResult());
 
 	this->SafeMoveUpdatedComponent(moveVector, FQuat::Identity, true, hitResult);

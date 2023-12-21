@@ -3,7 +3,7 @@
 
 #include "ThirdPersonCharacter.h"
 #include "Kismet/GameplayStatics.h"
-#include "Sleigh.h"
+#include "SleighPawn.h"
 #include "Present.h"
 
 // getters and setters
@@ -68,17 +68,17 @@ void AThirdPersonCharacter::PossessSleigh()
 
 	// get all actors of type sleigh
 	TArray<AActor*> actors;
-	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ASleigh::StaticClass(), actors);
+	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ASleighPawn::StaticClass(), actors);
 
 	// get first actor which is the only sleigh in the game
 	AActor* actor = actors[0];
-	ASleigh* sleigh = (ASleigh*)actor;
+	ASleighPawn* sleigh = (ASleighPawn*)actor;
 
-	FVector playerPosition = sleigh->playerPosition;
-	FRotator sleighRotation = sleigh->GetActorRotation();
+	//FVector playerPosition = sleigh->playerPosition;
+	//FRotator sleighRotation = sleigh->GetActorRotation();
 
 	// teleport player to playerPosition in sleigh
-	Super::TeleportTo(playerPosition, sleighRotation);
+	//Super::TeleportTo(playerPosition, sleighRotation);
 
 	playerController->Possess((APawn*)actor);
 
