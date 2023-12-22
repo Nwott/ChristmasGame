@@ -41,13 +41,12 @@ void UCustomMovementComponent::HandleCamera()
 {
 	FRotator rotation = *(new FRotator());
 
-	if (pawn != NULL)
-	{
-		rotation = pawn->GetControlRotation();
-	}
+	rotation = pawn->GetControlRotation();
 
 	UE_LOG(LogTemp, Display, TEXT("Rotation: %s"), *rotation.ToString());
 
+	// remove pitch
+	rotation = *(new FRotator(0, rotation.Yaw, rotation.Roll));
 	actor->SetActorRotation(rotation);
 }
 

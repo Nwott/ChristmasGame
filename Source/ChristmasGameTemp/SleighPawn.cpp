@@ -21,9 +21,6 @@ void ASleighPawn::BeginPlay()
 void ASleighPawn::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	//HandleMovement();
-	//HandleCamera();
-	//ApplyGravity();
 }
 
 // Called to bind functionality to input
@@ -31,38 +28,4 @@ void ASleighPawn::SetupPlayerInputComponent(UInputComponent* PlayerInputComponen
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
-}
-
-void ASleighPawn::HandleMovement()
-{
-	// reset movement input vector
-	ConsumeMovementInputVector();
-
-	// get movement input vector
-	FVector moveVector = GetLastMovementInputVector();
-	moveVector.Normalize();
-
-	// multiply moveVector by delta time and moveSpeed
-	// i dont know if you need to multiply it by delta time or if it is already multiplied when you
-	// get it from GetPendingMovementInputVector
-	moveVector *= FApp::GetDeltaTime() * moveSpeed;
-
-	movement->Move(moveVector);
-}
-
-void ASleighPawn::HandleCamera()
-{
-	// get controller rotation
-	FRotator rotation = this->GetControlRotation();
-
-	//movement->HandleCamera(rotation);
-}
-
-void ASleighPawn::ApplyGravity()
-{
-	FVector gravityVector = *(new FVector(0, 0, -1));
-
-	gravityVector *= gravity;
-
-	movement->Move(gravityVector);
 }
