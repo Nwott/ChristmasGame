@@ -26,6 +26,8 @@ protected:
 
 	UClass* GetActorType();
 
+	void ApplyGravity();
+
 public:
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 	virtual void Move(FVector moveDelta);

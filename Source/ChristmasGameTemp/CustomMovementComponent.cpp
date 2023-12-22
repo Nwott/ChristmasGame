@@ -35,6 +35,7 @@ void UCustomMovementComponent::TickComponent(float DeltaTime, ELevelTick TickTyp
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 	HandleCamera();
+	ApplyGravity();
 }
 
 void UCustomMovementComponent::HandleCamera()
@@ -43,7 +44,6 @@ void UCustomMovementComponent::HandleCamera()
 
 	rotation = pawn->GetControlRotation();
 
-	UE_LOG(LogTemp, Display, TEXT("Rotation: %s"), *rotation.ToString());
 
 	// remove pitch
 	rotation = *(new FRotator(0, rotation.Yaw, rotation.Roll));
@@ -52,13 +52,24 @@ void UCustomMovementComponent::HandleCamera()
 
 void UCustomMovementComponent::Move(FVector moveDelta)
 {
+//	FHitResult hitResult(1.f);
 	FHitResult* hitResult = new FHitResult();
+	
 
-	//this->SafeMoveUpdatedComponent(moveVector, FQuat::Identity, false, hitResult);
+	//this->SafeMoveUpdatedComponent(moveDelta, FQuat::Identity, false, hitResult);
 	actor->SetActorLocation(actor->GetActorLocation() + moveDelta, true, hitResult);
 }
 
 UClass* UCustomMovementComponent::GetActorType()
 {
 	return actor->GetClass();
+}
+
+void UCustomMovementComponent::ApplyGravity()
+{
+	FVector gravityVector = *(new FVector(0, 0, -1));
+
+	gravityVector *= 100 * FApp::GetDeltaTime();
+
+	Move(gravityVector);
 }
