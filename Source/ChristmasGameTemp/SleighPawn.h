@@ -25,6 +25,14 @@ protected:
 	UFUNCTION(BlueprintCallable, Category="Sleigh")
 	virtual void OnPlayerExit();
 
+	UFUNCTION(BlueprintCallable, Category="Sleigh")
+	virtual void OnPlayerPresentPickupEnter(AActor* actor);
+
+	UFUNCTION(BlueprintCallable, Category="Sleigh")
+	virtual void OnPlayerPresentPickupExit(AActor* actor);
+
+	bool IsPlayer(AActor* actor);
+
 	AThirdPersonCharacter* player;
 
 	// where player sits in sleigh

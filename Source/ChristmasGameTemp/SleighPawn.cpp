@@ -47,3 +47,36 @@ void ASleighPawn::OnPlayerExit()
 	player->OnExitSleigh();
 	player->SetInSleigh(false);
 }
+
+void ASleighPawn::OnPlayerPresentPickupEnter(AActor* actor)
+{
+	if (IsPlayer(actor))
+	{
+		player->SetInPickupRange(true);
+		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Entered present pickup collision."));
+	}
+}
+
+void ASleighPawn::OnPlayerPresentPickupExit(AActor* actor)
+{
+	if (IsPlayer(actor))
+	{
+		player->SetInPickupRange(false);
+		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Left present pickup collision."));
+	}
+}
+
+bool ASleighPawn::IsPlayer(AActor* actor)
+{
+	UClass* actorClass = actor->GetClass();
+
+	// check if colliding actori s the player
+	if (actorClass->IsChildOf(AThirdPersonCharacter::StaticClass()))
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
