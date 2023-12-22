@@ -69,7 +69,7 @@ void UCustomMovementComponent::ApplyGravity()
 {
 	FVector gravityVector = *(new FVector(0, 0, -1));
 
-	gravityVector *= 100 * FApp::GetDeltaTime();
+	gravityVector *= 2000 * FApp::GetDeltaTime();
 
 	Move(gravityVector);
 }
