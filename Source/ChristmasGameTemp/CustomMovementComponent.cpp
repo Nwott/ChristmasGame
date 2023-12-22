@@ -19,8 +19,7 @@ void UCustomMovementComponent::BeginPlay()
 {
 	Super::BeginPlay();
 
-	// ...
-
+	actor = GetOwner();
 }
 
 
@@ -33,8 +32,9 @@ void UCustomMovementComponent::TickComponent(float DeltaTime, ELevelTick TickTyp
 void UCustomMovementComponent::Move(FVector moveDelta)
 {
 	const FVector& moveVector = moveDelta;
-	FHitResult& hitResult = *(new FHitResult());
+	FHitResult* hitResult = new FHitResult();
 
-	this->SafeMoveUpdatedComponent(moveVector, FQuat::Identity, true, hitResult);
+	//this->SafeMoveUpdatedComponent(moveVector, FQuat::Identity, false, hitResult);
+	actor->SetActorLocation(actor->GetActorLocation() + moveVector, true, hitResult);
 }
 

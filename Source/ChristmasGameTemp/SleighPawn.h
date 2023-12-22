@@ -20,11 +20,15 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 	virtual void HandleMovement();
+	virtual void ApplyGravity();
 
 	UCustomMovementComponent* movement;
 
 	UPROPERTY(BlueprintReadWrite)
 	float moveSpeed;
+
+	UPROPERTY(BlueprintReadWrite)
+	float gravity;
 
 public:	
 	// Called every frame

@@ -22,6 +22,7 @@ void ASleighPawn::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 	HandleMovement();
+	ApplyGravity();
 }
 
 // Called to bind functionality to input
@@ -48,4 +49,13 @@ void ASleighPawn::HandleMovement()
 	UE_LOG(LogTemp, Display, TEXT("Move Vector: %s"), *moveVector.ToString());
 
 	movement->Move(moveVector);
+}
+
+void ASleighPawn::ApplyGravity()
+{
+	FVector gravityVector = *(new FVector(0, 0, -1));
+	
+	gravityVector *= gravity;
+
+	movement->Move(gravityVector);
 }
