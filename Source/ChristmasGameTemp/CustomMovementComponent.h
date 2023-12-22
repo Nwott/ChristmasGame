@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "GameFramework/SpringArmComponent.h"
 #include "GameFramework/FloatingPawnMovement.h"
 #include "GameFramework/Pawn.h"
 #include "CustomMovementComponent.generated.h"
@@ -23,6 +24,8 @@ protected:
 	AActor* actor;
 	UClass* actorType;
 	APawn* pawn;
+
+	USpringArmComponent* springArm;
 
 	UClass* GetActorType();
 

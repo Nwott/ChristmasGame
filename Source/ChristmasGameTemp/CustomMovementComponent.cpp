@@ -27,6 +27,9 @@ void UCustomMovementComponent::BeginPlay()
 	{
 		pawn = (APawn*)actor;
 	}
+
+	// get spring arm
+	springArm = actor->FindComponentByClass<USpringArmComponent>();
 }
 
 
@@ -44,10 +47,17 @@ void UCustomMovementComponent::HandleCamera()
 
 	rotation = pawn->GetControlRotation();
 
+	// camera rotation only has pitch
+	FRotator cameraRotation = *(new FRotator(rotation.Pitch, 0, 0));
 
 	// remove pitch
 	rotation = *(new FRotator(0, rotation.Yaw, rotation.Roll));
+
+	FRotator springArmRotation = springArm->GetComponentRotation();
+	springArmRotation = *(new FRotator(cameraRotation.Pitch, 0, 0));
+
 	actor->SetActorRotation(rotation);
+	springArm->SetRelativeRotation(springArmRotation);
 }
 
 void UCustomMovementComponent::Move(FVector moveDelta)
