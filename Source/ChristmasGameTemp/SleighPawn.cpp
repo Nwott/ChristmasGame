@@ -21,8 +21,9 @@ void ASleighPawn::BeginPlay()
 void ASleighPawn::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	HandleMovement();
-	ApplyGravity();
+	//HandleMovement();
+	//HandleCamera();
+	//ApplyGravity();
 }
 
 // Called to bind functionality to input
@@ -46,15 +47,21 @@ void ASleighPawn::HandleMovement()
 	// get it from GetPendingMovementInputVector
 	moveVector *= FApp::GetDeltaTime() * moveSpeed;
 
-	UE_LOG(LogTemp, Display, TEXT("Move Vector: %s"), *moveVector.ToString());
-
 	movement->Move(moveVector);
+}
+
+void ASleighPawn::HandleCamera()
+{
+	// get controller rotation
+	FRotator rotation = this->GetControlRotation();
+
+	//movement->HandleCamera(rotation);
 }
 
 void ASleighPawn::ApplyGravity()
 {
 	FVector gravityVector = *(new FVector(0, 0, -1));
-	
+
 	gravityVector *= gravity;
 
 	movement->Move(gravityVector);

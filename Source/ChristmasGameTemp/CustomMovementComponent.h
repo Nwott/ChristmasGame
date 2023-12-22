@@ -3,14 +3,15 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameFramework/MovementComponent.h"
+#include "GameFramework/FloatingPawnMovement.h"
+#include "GameFramework/Pawn.h"
 #include "CustomMovementComponent.generated.h"
 
 /**
  * 
  */
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
-class CHRISTMASGAMETEMP_API UCustomMovementComponent : public UMovementComponent
+class CHRISTMASGAMETEMP_API UCustomMovementComponent : public UFloatingPawnMovement 
 {
 	GENERATED_BODY()
 public:	
@@ -20,8 +21,15 @@ public:
 protected:
 	virtual void BeginPlay() override;
 	AActor* actor;
+	UClass* actorType;
+	APawn* pawn;
+
+	UClass* GetActorType();
 
 public:
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 	virtual void Move(FVector moveDelta);
+
+	// rotates the player
+	virtual void HandleCamera();
 };
