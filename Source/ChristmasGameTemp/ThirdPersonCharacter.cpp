@@ -87,8 +87,6 @@ void AThirdPersonCharacter::PossessSleigh()
 	FVector playerPosition = sleigh->GetPlayerLocation();
 	FRotator sleighRotation = sleigh->GetActorRotation();
 
-	UE_LOG(LogTemp, Display, TEXT("Player position: %s"), *playerPosition.ToString());
-
 	// teleport player to playerPosition in sleigh
 	Super::TeleportTo(playerPosition, sleighRotation);
 
