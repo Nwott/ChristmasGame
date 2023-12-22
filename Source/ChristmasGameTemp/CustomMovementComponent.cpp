@@ -47,8 +47,13 @@ void UCustomMovementComponent::HandleCamera()
 
 	rotation = pawn->GetControlRotation();
 
+	float pitch = rotation.Pitch;
+
 	// camera rotation only has pitch
-	FRotator cameraRotation = *(new FRotator(rotation.Pitch, 0, 0));
+	FRotator cameraRotation = *(new FRotator(pitch, 0, 0));
+
+	// clamp between 270 and 60
+	
 
 	// remove pitch
 	rotation = *(new FRotator(0, rotation.Yaw, rotation.Roll));

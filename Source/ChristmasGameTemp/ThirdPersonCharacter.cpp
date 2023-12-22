@@ -74,12 +74,6 @@ void AThirdPersonCharacter::PossessSleigh()
 	AActor* actor = actors[0];
 	ASleighPawn* sleigh = (ASleighPawn*)actor;
 
-	//FVector playerPosition = sleigh->playerPosition;
-	//FRotator sleighRotation = sleigh->GetActorRotation();
-
-	// teleport player to playerPosition in sleigh
-	//Super::TeleportTo(playerPosition, sleighRotation);
-
 	playerController->Possess((APawn*)actor);
 
 	// disable collision for player so it doesnt collide while inside sleigh
@@ -89,6 +83,14 @@ void AThirdPersonCharacter::PossessSleigh()
 	// attach player to sleigh
 	// similar to setting transform.parent in unity
 	Super::AttachToActor(actor, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
+
+	FVector playerPosition = sleigh->GetPlayerLocation();
+	FRotator sleighRotation = sleigh->GetActorRotation();
+
+	UE_LOG(LogTemp, Display, TEXT("Player position: %s"), *playerPosition.ToString());
+
+	// teleport player to playerPosition in sleigh
+	Super::TeleportTo(playerPosition, sleighRotation);
 
 	SetInSleigh(true);
 }

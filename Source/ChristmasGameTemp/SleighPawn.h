@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
+#include "ThirdPersonCharacter.h"
 #include "CustomMovementComponent.h"
 #include "SleighPawn.generated.h"
 
@@ -21,11 +22,20 @@ protected:
 	virtual void BeginPlay() override;
 	UCustomMovementComponent* movement;
 
-public:	
+	UFUNCTION(BlueprintCallable, Category="Sleigh")
+	virtual void OnPlayerExit();
+
+	AThirdPersonCharacter* player;
+
+	// where player sits in sleigh
+	USceneComponent* playerLocation;
+
+public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-
+	
+	FVector GetPlayerLocation();
 };

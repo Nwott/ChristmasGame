@@ -2,6 +2,8 @@
 
 
 #include "SleighPawn.h"
+#include "Kismet/GameplayStatics.h"
+#include "ThirdPersonCharacter.h"
 
 // Sets default values
 ASleighPawn::ASleighPawn()
@@ -15,6 +17,8 @@ void ASleighPawn::BeginPlay()
 {
 	Super::BeginPlay();
 	movement = this->FindComponentByClass<UCustomMovementComponent>();
+	player = (AThirdPersonCharacter*)UGameplayStatics::GetActorOfClass(GetWorld(), AThirdPersonCharacter::StaticClass());
+	playerLocation = this->FindComponentByTag<USceneComponent>("PlayerLocation");
 }
 
 // Called every frame
@@ -30,3 +34,16 @@ void ASleighPawn::SetupPlayerInputComponent(UInputComponent* PlayerInputComponen
 
 }
 
+FVector ASleighPawn::GetPlayerLocation()
+{
+	return playerLocation->GetComponentLocation();
+}
+
+void ASleighPawn::OnPlayerExit()
+{
+	// if player is not in sleigh, dont run this method
+	if (!player->GetInSleigh()) return;
+
+	player->OnExitSleigh();
+	player->SetInSleigh(false);
+}
