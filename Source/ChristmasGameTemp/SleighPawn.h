@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
 #include "ThirdPersonCharacter.h"
+#include "Field/FieldSystemComponent.h"
 #include "CustomMovementComponent.h"
 #include "SleighPawn.generated.h"
 
@@ -31,6 +32,9 @@ protected:
 	UFUNCTION(BlueprintCallable, Category="Sleigh")
 	virtual void OnPlayerPresentPickupExit(AActor* actor);
 
+	UFUNCTION(BlueprintCallable, Category="Sleigh")
+	virtual void OnHouseCollide(AActor* actor, FHitResult hitResult, UFieldSystemComponent* fieldSystem);
+
 	bool IsPlayer(AActor* actor);
 
 	AThirdPersonCharacter* player;
@@ -44,6 +48,6 @@ public:
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-	
+
 	FVector GetPlayerLocation();
 };

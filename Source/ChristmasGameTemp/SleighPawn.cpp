@@ -3,7 +3,9 @@
 
 #include "SleighPawn.h"
 #include "Kismet/GameplayStatics.h"
+#include "Field/FieldSystemComponent.h"
 #include "ThirdPersonCharacter.h"
+#include "House.h"
 
 // Sets default values
 ASleighPawn::ASleighPawn()
@@ -66,11 +68,25 @@ void ASleighPawn::OnPlayerPresentPickupExit(AActor* actor)
 	}
 }
 
+void ASleighPawn::OnHouseCollide(AActor* actor, FHitResult hitResult, UFieldSystemComponent* fieldSystem)
+{
+	UClass* actorClass = actor->GetClass();
+
+	// check if colliding actor is the player
+	if (actorClass->IsChildOf(AHouse::StaticClass()))
+	{
+		// get impact point on collision
+		FVector impactPoint = hitResult.ImpactPoint;
+
+		fieldSystem->ApplyStayDynamicField(true, impactPoint, 50);
+	}
+}
+
 bool ASleighPawn::IsPlayer(AActor* actor)
 {
 	UClass* actorClass = actor->GetClass();
 
-	// check if colliding actori s the player
+	// check if colliding actor is the player
 	if (actorClass->IsChildOf(AThirdPersonCharacter::StaticClass()))
 	{
 		return true;
