@@ -4,6 +4,8 @@
 #include "House.h"
 #include "ThirdPersonCharacter.h"
 #include "Present.h"
+#include "Kismet/KismetMathLibrary.h"
+#include "Kismet/GameplayStatics.h"
 
 // Sets default values
 AHouse::AHouse()
@@ -19,18 +21,19 @@ void AHouse::BeginPlay()
 {
 	Super::BeginPlay();
 	wPresentCount = FindComponentByTag<USceneComponent>("PresentCount");
-
-	if (wPresentCount != NULL)
-	{
-		// hide present count
-		wPresentCount->SetVisibility(false);
-	}
+	wPresentCountLoc = wPresentCount->GetComponentLocation();
+	player = UGameplayStatics::GetActorOfClass(GetWorld(), AThirdPersonCharacter::StaticClass());
 }
 
 // Called every frame
 void AHouse::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+
+	if (wPresentCount != NULL)
+	{
+		wPresentCount->SetWorldRotation(UKismetMathLibrary::FindLookAtRotation(wPresentCountLoc, player->GetActorLocation()));
+	}
 }
 
 void AHouse::OnPlayerColliderOverlap(AActor* otherActor)

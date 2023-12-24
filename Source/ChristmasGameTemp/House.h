@@ -37,6 +37,9 @@ protected:
 	int presents;
 
 	USceneComponent* wPresentCount;
+	FVector wPresentCountLoc;
+
+	AActor* player;
 
 public:	
 	// Called every frame
