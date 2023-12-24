@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Blueprint/UserWidget.h"
 #include "GameFramework/Actor.h"
 #include "House.generated.h"
 
@@ -34,6 +35,8 @@ protected:
 	int totalPresents;
 
 	int presents;
+
+	USceneComponent* wPresentCount;
 
 public:	
 	// Called every frame

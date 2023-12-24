@@ -68,20 +68,6 @@ void ASleighPawn::OnPlayerPresentPickupExit(AActor* actor)
 	}
 }
 
-void ASleighPawn::OnHouseCollide(AActor* actor, FHitResult hitResult, UFieldSystemComponent* fieldSystem)
-{
-	UClass* actorClass = actor->GetClass();
-
-	// check if colliding actor is the player
-	if (actorClass->IsChildOf(AHouse::StaticClass()))
-	{
-		// get impact point on collision
-		FVector impactPoint = hitResult.ImpactPoint;
-
-		fieldSystem->ApplyStayDynamicField(true, impactPoint, 50);
-	}
-}
-
 bool ASleighPawn::IsPlayer(AActor* actor)
 {
 	UClass* actorClass = actor->GetClass();

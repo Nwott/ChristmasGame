@@ -18,14 +18,19 @@ AHouse::AHouse()
 void AHouse::BeginPlay()
 {
 	Super::BeginPlay();
-	
+	wPresentCount = FindComponentByTag<USceneComponent>("PresentCount");
+
+	if (wPresentCount != NULL)
+	{
+		// hide present count
+		wPresentCount->SetVisibility(false);
+	}
 }
 
 // Called every frame
 void AHouse::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
 }
 
 void AHouse::OnPlayerColliderOverlap(AActor* otherActor)
