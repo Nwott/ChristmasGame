@@ -78,9 +78,13 @@ void AHouse::OnPresentColliderEnter(AActor* otherActor)
 {
 	if (!IsPresent(otherActor) || presents >= totalPresents) return;
 
-	SetPresents(presents + 1);
+	if (!presentsInHouse.Contains(otherActor))
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, FString::FromInt(presents));
+		SetPresents(presents + 1);
+		presentsInHouse.Add(otherActor);
+	}
 
-	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, FString::FromInt(presents));
 }
 
 void AHouse::OnPresentColliderExit(AActor* otherActor)

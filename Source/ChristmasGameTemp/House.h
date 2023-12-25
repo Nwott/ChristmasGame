@@ -34,6 +34,9 @@ protected:
 
 	bool IsPresent(AActor* actor);
 
+	// prevents player from placing same present in house twice
+	TArray<AActor*> presentsInHouse;
+
 	int totalPresents;
 
 	int presents;
