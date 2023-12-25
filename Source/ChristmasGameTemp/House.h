@@ -3,7 +3,9 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Components/WidgetComponent.h"
 #include "Blueprint/UserWidget.h"
+#include "PresentCountWidget.h"
 #include "GameFramework/Actor.h"
 #include "House.generated.h"
 
@@ -41,7 +43,12 @@ protected:
 
 	AActor* player;
 
-public:	
+	UWidgetComponent* presentWidgetComponent;
+
+	UFUNCTION(BlueprintCallable, Category = "House")
+	void SetPresentWidget(UWidgetComponent* widget);
+
+public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 

@@ -6,6 +6,8 @@
 #include "Present.h"
 #include "Kismet/KismetMathLibrary.h"
 #include "Kismet/GameplayStatics.h"
+#include "PresentCountWidget.h"
+#include "Blueprint/UserWidget.h"
 
 // Sets default values
 AHouse::AHouse()
@@ -34,6 +36,11 @@ void AHouse::Tick(float DeltaTime)
 	{
 		wPresentCount->SetWorldRotation(UKismetMathLibrary::FindLookAtRotation(wPresentCountLoc, player->GetActorLocation()));
 	}
+}
+
+void AHouse::SetPresentWidget(UWidgetComponent* widget)
+{
+	presentWidgetComponent = widget;
 }
 
 void AHouse::OnPlayerColliderOverlap(AActor* otherActor)
