@@ -38,9 +38,10 @@ void AHouse::Tick(float DeltaTime)
 	}
 }
 
-void AHouse::SetPresentWidget(UWidgetComponent* widget)
+void AHouse::SetPresentWidget(UPresentCountWidget* widget)
 {
-	presentWidgetComponent = widget;
+	presentCountWidget = widget;
+	presentCountWidget->UpdateTextBlock("727 wysi");
 }
 
 void AHouse::OnPlayerColliderOverlap(AActor* otherActor)

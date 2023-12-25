@@ -19,6 +19,7 @@ protected:
 	UPROPERTY(BlueprintReadOnly, meta = (BindWidget))
 	class UTextBlock* PresentTextBlock;
 
+public:
 	void UpdateTextBlock(FString text);
 };
 

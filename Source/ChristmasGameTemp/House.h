@@ -43,10 +43,10 @@ protected:
 
 	AActor* player;
 
-	UWidgetComponent* presentWidgetComponent;
+	UPresentCountWidget* presentCountWidget;
 
 	UFUNCTION(BlueprintCallable, Category = "House")
-	void SetPresentWidget(UWidgetComponent* widget);
+	void SetPresentWidget(UPresentCountWidget* widget);
 
 public:
 	// Called every frame
