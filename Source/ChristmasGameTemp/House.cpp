@@ -14,8 +14,6 @@ AHouse::AHouse()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-	presents = 0;
-	totalPresents = FMath::RandRange(1, 3);
 }
 
 // Called when the game starts or when spawned
@@ -41,7 +39,8 @@ void AHouse::Tick(float DeltaTime)
 void AHouse::SetPresentWidget(UPresentCountWidget* widget)
 {
 	presentCountWidget = widget;
-	presentCountWidget->UpdateTextBlock("727 wysi");
+	SetPresents(0);
+	SetTotalPresents(FMath::RandRange(1, 3));
 }
 
 void AHouse::OnPlayerColliderOverlap(AActor* otherActor)
@@ -56,11 +55,30 @@ void AHouse::OnPlayerColliderOverlap(AActor* otherActor)
 	}
 }
 
+void AHouse::SetPresents(int value)
+{
+	presents = value;
+	FString text = FString::FromInt(presents) + " / " + FString::FromInt(totalPresents);
+	UpdatePresentWidget(text);
+}
+
+void AHouse::SetTotalPresents(int value)
+{
+	totalPresents = value;
+	FString text = FString::FromInt(presents) + " / " + FString::FromInt(totalPresents);
+	UpdatePresentWidget(text);
+}
+
+void AHouse::UpdatePresentWidget(FString text)
+{
+	presentCountWidget->UpdateTextBlock(text);
+}
+
 void AHouse::OnPresentColliderEnter(AActor* otherActor)
 {
 	if (!IsPresent(otherActor) || presents >= totalPresents) return;
 
-	presents++;
+	SetPresents(presents + 1);
 
 	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, FString::FromInt(presents));
 }

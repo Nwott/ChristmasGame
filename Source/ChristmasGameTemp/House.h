@@ -48,6 +48,10 @@ protected:
 	UFUNCTION(BlueprintCallable, Category = "House")
 	void SetPresentWidget(UPresentCountWidget* widget);
 
+	void SetPresents(int value);
+	void SetTotalPresents(int value);
+	void UpdatePresentWidget(FString text);
+
 public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
