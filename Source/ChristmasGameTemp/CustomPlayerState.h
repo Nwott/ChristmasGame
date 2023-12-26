@@ -16,7 +16,7 @@ class CHRISTMASGAMETEMP_API ACustomPlayerState : public APlayerState
 	
 protected:
 	float timeElapsed;
-	AHUD* hud;
+	APlayerHUDController* hud;
 
 	UFUNCTION(BlueprintCallable, Category="Player State")
 	void CalculateTimeElapsed(float DeltaTime);
@@ -25,5 +25,7 @@ protected:
 	FString FormatTimeElapsed();
 
 	UFUNCTION(BlueprintCallable, Category="Player State")
-	void SetHUD(AHUD* value);
+	void SetHUD(APlayerHUDController* value);
+
+	void UpdateHUD();
 };
