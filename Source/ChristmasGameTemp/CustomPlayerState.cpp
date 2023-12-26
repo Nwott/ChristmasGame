@@ -24,3 +24,8 @@ FString ACustomPlayerState::FormatTimeElapsed()
 
 	return time;
 }
+
+void ACustomPlayerState::SetHUD(AHUD* value)
+{
+	hud = value;	
+}
