@@ -14,4 +14,14 @@ class CHRISTMASGAMETEMP_API ACustomPlayerState : public APlayerState
 {
 	GENERATED_BODY()
 	
+protected:
+	float timeElapsed;
+
+	UFUNCTION(BlueprintCallable, Category="Player State")
+	void CalculateTimeElapsed(float DeltaTime);
+
+	UFUNCTION(BlueprintCallable, Category="Player State")
+	FString FormatTimeElapsed();
+
+
 };
