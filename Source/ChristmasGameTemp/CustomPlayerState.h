@@ -17,6 +17,9 @@ class CHRISTMASGAMETEMP_API ACustomPlayerState : public APlayerState
 protected:
 	float timeElapsed;
 	APlayerHUDController* hud;
+	int presentsDelivered;
+	int presentsLeft;
+	int totalPresents;
 
 	UFUNCTION(BlueprintCallable, Category="Player State")
 	void CalculateTimeElapsed(float DeltaTime);
@@ -27,5 +30,14 @@ protected:
 	UFUNCTION(BlueprintCallable, Category="Player State")
 	void SetHUD(APlayerHUDController* value);
 
-	void UpdateHUD();
+	UFUNCTION(BlueprintCallable, Category="Player State")
+	void InitialUpdate();
+
+	bool initialized;
+
+	void UpdateTimeElapsed();
+	
+public:
+	void UpdatePresents(int delta);
+	void UpdateTotalPresents(int delta);
 };

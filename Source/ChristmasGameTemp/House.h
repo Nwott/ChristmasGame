@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "CustomPlayerState.h"
 #include "Components/WidgetComponent.h"
 #include "Blueprint/UserWidget.h"
 #include "PresentCountWidget.h"
@@ -22,6 +23,8 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+	ACustomPlayerState* playerState;
+	
 	// Gets called when player is in box collider of house
 	UFUNCTION(BlueprintCallable, Category="House")
 	void OnPlayerColliderOverlap(AActor* otherActor);

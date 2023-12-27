@@ -38,9 +38,11 @@ void AHouse::Tick(float DeltaTime)
 
 void AHouse::SetPresentWidget(UPresentCountWidget* widget)
 {
+	playerState = (ACustomPlayerState*)UGameplayStatics::GetPlayerState(GetWorld(), 0);
 	presentCountWidget = widget;
 	SetPresents(0);
 	SetTotalPresents(FMath::RandRange(1, 3));
+	playerState->UpdatePresents(0);
 }
 
 void AHouse::OnPlayerColliderOverlap(AActor* otherActor)
@@ -50,8 +52,6 @@ void AHouse::OnPlayerColliderOverlap(AActor* otherActor)
 	// check if actor collided with is the player
 	if (actorClass->IsChildOf(AThirdPersonCharacter::StaticClass()))
 	{
-		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, FString::FromInt(totalPresents));
-		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, FString::FromInt(presents));
 	}
 }
 
@@ -67,6 +67,7 @@ void AHouse::SetTotalPresents(int value)
 	totalPresents = value;
 	FString text = FString::FromInt(presents) + " / " + FString::FromInt(totalPresents);
 	UpdatePresentWidget(text);
+	playerState->UpdateTotalPresents(value);
 }
 
 void AHouse::UpdatePresentWidget(FString text)
@@ -80,9 +81,10 @@ void AHouse::OnPresentColliderEnter(AActor* otherActor)
 
 	if (!presentsInHouse.Contains(otherActor))
 	{
-		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, FString::FromInt(presents));
-		SetPresents(presents + 1);
+		UE_LOG(LogTemp, Display, TEXT("Testing"));
 		presentsInHouse.Add(otherActor);
+		SetPresents(presents + 1);
+		playerState->UpdatePresents(1);
 	}
 
 }
