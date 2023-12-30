@@ -40,18 +40,29 @@ void ACustomPlayerState::SetHUD(APlayerHUDController* value)
 	hud = value;
 }
 
+void ACustomPlayerState::EndGame()
+{
+	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Game over"));
+	
+}
+
 void ACustomPlayerState::UpdatePresents(int delta)
 {
 	presentsDelivered += delta;
 	presentsLeft = totalPresents - presentsDelivered;
 
 	// check if presents left is more than zero and also check if hud is initialized
-	if(presentsLeft > 0 && hud)
+	if(presentsLeft >= 0 && hud)
 	{
 		if(hud->GetHUD())
 		{
 			hud->GetHUD()->UpdatePresentsDelivered("Presents Delivered: " + FString::FromInt(presentsDelivered));
 			hud->GetHUD()->UpdatePresentsLeft("Presents Left: " + FString::FromInt(presentsLeft));
+		}
+
+		if(presentsLeft <= 0)
+		{
+			EndGame();
 		}
 	}
 }

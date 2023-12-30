@@ -32,6 +32,8 @@ protected:
 
 	UFUNCTION(BlueprintCallable, Category="Player State")
 	void InitialUpdate();
+	
+	void EndGame();
 
 	bool initialized;
 

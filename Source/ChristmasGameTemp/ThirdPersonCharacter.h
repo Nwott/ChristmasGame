@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "EndScreenController.h"
 #include "GameFramework/Character.h"
 #include "ThirdPersonCharacter.generated.h"
 

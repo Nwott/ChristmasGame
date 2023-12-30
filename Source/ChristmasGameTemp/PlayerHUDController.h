@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "EndScreenController.h"
 #include "PlayerHUD.h"
 #include "GameFramework/HUD.h"
 #include "PlayerHUDController.generated.h"
@@ -21,6 +22,8 @@ protected:
 	UFUNCTION(BlueprintCallable, Category="HUD")
 	void SetHUD(UPlayerHUD* value);
 
+	UEndScreenController* MakeEndScreen();
+	
 public:
 	UPlayerHUD* GetHUD();
 };
