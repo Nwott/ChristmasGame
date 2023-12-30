@@ -13,4 +13,11 @@ UCLASS()
 class CHRISTMASGAMETEMP_API UEndScreenController : public UUserWidget
 {
 	GENERATED_BODY()
+
+protected:
+	UPROPERTY(BlueprintReadonly, meta = (BindWidget))
+	class UTextBlock* TextScore;
+
+public:
+	void UpdateScore(float presentsPerMin, int score);
 };
