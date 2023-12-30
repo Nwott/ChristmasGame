@@ -43,7 +43,7 @@ void ACustomPlayerState::SetHUD(APlayerHUDController* value)
 void ACustomPlayerState::EndGame()
 {
 	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Game over"));
-	
+	hud->MakeEndScreen(endScreen);	
 }
 
 void ACustomPlayerState::UpdatePresents(int delta)

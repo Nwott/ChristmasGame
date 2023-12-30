@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "EndScreenController.h"
 #include "GameFramework/PlayerState.h"
 #include "CustomPlayerState.generated.h"
 
@@ -32,6 +33,9 @@ protected:
 
 	UFUNCTION(BlueprintCallable, Category="Player State")
 	void InitialUpdate();
+
+	UPROPERTY(EditDefaultsOnly, Category="HUD")
+	TSubclassOf<UEndScreenController> endScreen;
 	
 	void EndGame();
 

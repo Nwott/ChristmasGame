@@ -14,11 +14,15 @@ UPlayerHUD* APlayerHUDController::GetHUD()
 	return hud;
 }
 
-UEndScreenController* APlayerHUDController::MakeEndScreen()
+void APlayerHUDController::MakeEndScreen(TSubclassOf<UEndScreenController> widget)
 {
 	APlayerController* playerController = UGameplayStatics::GetPlayerController(GetWorld(), 0);
-	UEndScreenController* endScreen = CreateWidget<UEndScreenController>(playerController, UEndScreenController::StaticClass());
-
-	return endScreen;
+	UEndScreenController* endScreen = CreateWidget<UEndScreenController>(
+		playerController, widget);
+	FInputModeGameAndUI mode;
+	mode.SetLockMouseToViewportBehavior(EMouseLockMode::LockAlways);
+	mode.SetHideCursorDuringCapture(false);
+	playerController->SetInputMode(mode);
+	endScreen->AddToViewport(9999);
 }
 

@@ -21,9 +21,8 @@ protected:
 
 	UFUNCTION(BlueprintCallable, Category="HUD")
 	void SetHUD(UPlayerHUD* value);
-
-	UEndScreenController* MakeEndScreen();
 	
 public:
 	UPlayerHUD* GetHUD();
+	void MakeEndScreen(TSubclassOf<UEndScreenController> widget);
 };
