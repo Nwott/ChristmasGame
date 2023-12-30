@@ -14,7 +14,7 @@ UPlayerHUD* APlayerHUDController::GetHUD()
 	return hud;
 }
 
-void APlayerHUDController::MakeEndScreen(TSubclassOf<UEndScreenController> widget)
+UEndScreenController* APlayerHUDController::MakeEndScreen(TSubclassOf<UEndScreenController> widget)
 {
 	APlayerController* playerController = UGameplayStatics::GetPlayerController(GetWorld(), 0);
 	UEndScreenController* endScreen = CreateWidget<UEndScreenController>(
@@ -24,5 +24,7 @@ void APlayerHUDController::MakeEndScreen(TSubclassOf<UEndScreenController> widge
 	mode.SetHideCursorDuringCapture(false);
 	playerController->SetInputMode(mode);
 	endScreen->AddToViewport(9999);
+
+	return endScreen;	
 }
 

@@ -24,5 +24,5 @@ protected:
 	
 public:
 	UPlayerHUD* GetHUD();
-	void MakeEndScreen(TSubclassOf<UEndScreenController> widget);
+	UEndScreenController* MakeEndScreen(TSubclassOf<UEndScreenController> widget);
 };

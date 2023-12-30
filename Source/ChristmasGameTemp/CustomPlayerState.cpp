@@ -43,7 +43,9 @@ void ACustomPlayerState::SetHUD(APlayerHUDController* value)
 void ACustomPlayerState::EndGame()
 {
 	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Game over"));
-	hud->MakeEndScreen(endScreen);	
+	UEndScreenController* end = hud->MakeEndScreen(endScreen);
+	TTuple<float, int> scoreTuple = FormatScore();
+	end->UpdateScore(scoreTuple.Get<0>(), scoreTuple.Get<1>());
 }
 
 void ACustomPlayerState::UpdatePresents(int delta)
@@ -90,3 +92,13 @@ void ACustomPlayerState::InitialUpdate()
 	}
 }
 
+TTuple<float, int> ACustomPlayerState::FormatScore()
+{
+	float presentsPerMin = presentsDelivered / timeElapsed;
+	presentsPerMin *= 100;
+	presentsPerMin = FMath::Floor(presentsPerMin);
+	presentsPerMin /= 100;
+	int score = (int)FMath::Floor(presentsPerMin * 727);
+
+	return MakeTuple(presentsPerMin, score);
+}

@@ -42,6 +42,8 @@ protected:
 	bool initialized;
 
 	void UpdateTimeElapsed();
+
+	TTuple<float, int> FormatScore(); 
 	
 public:
 	void UpdatePresents(int delta);
