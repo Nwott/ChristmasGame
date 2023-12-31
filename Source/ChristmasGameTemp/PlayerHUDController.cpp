@@ -23,6 +23,7 @@ UEndScreenController* APlayerHUDController::MakeEndScreen(TSubclassOf<UEndScreen
 	mode.SetLockMouseToViewportBehavior(EMouseLockMode::LockAlways);
 	mode.SetHideCursorDuringCapture(false);
 	playerController->SetInputMode(mode);
+	playerController->SetShowMouseCursor(true);
 	endScreen->AddToViewport(9999);
 
 	return endScreen;	
