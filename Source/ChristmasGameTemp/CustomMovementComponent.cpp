@@ -89,3 +89,18 @@ void UCustomMovementComponent::ApplyGravity()
 
 	Move(gravityVector);
 }
+
+void UCustomMovementComponent::UnstuckTimer()
+{
+	
+}
+
+
+void UCustomMovementComponent::Unstuck()
+{
+	if(canUnstuck)
+	{
+		FHitResult* hitResult = new FHitResult();
+		actor->SetActorLocation(actor->GetActorLocation() + unstuckDisplacement, true, hitResult, ETeleportType::TeleportPhysics);
+	}
+}

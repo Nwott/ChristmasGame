@@ -31,6 +31,21 @@ protected:
 
 	void ApplyGravity();
 
+	UPROPERTY(EditDefaultsOnly, Category="Unstuck")
+	float unstuckInterval;
+
+	// where to move the player when they get unstuck
+	UPROPERTY(EditDefaultsOnly, Category="Unstuck")
+	FVector unstuckDisplacement;
+
+	float unstuckTimer;
+	bool canUnstuck = true;
+
+	void UnstuckTimer();
+
+	UFUNCTION(BlueprintCallable, Category="Unstuck")	
+	void Unstuck();
+
 public:
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 	virtual void Move(FVector moveDelta);
