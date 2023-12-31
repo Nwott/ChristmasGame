@@ -40,6 +40,7 @@ void UCustomMovementComponent::TickComponent(float DeltaTime, ELevelTick TickTyp
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 	HandleCamera();
 	ApplyGravity();
+	UnstuckTimer(DeltaTime);
 }
 
 void UCustomMovementComponent::HandleCamera()
@@ -54,7 +55,7 @@ void UCustomMovementComponent::HandleCamera()
 	FRotator cameraRotation = *(new FRotator(pitch, 0, 0));
 
 	// clamp between 270 and 60
-	
+
 
 	// remove pitch
 	rotation = *(new FRotator(0, rotation.Yaw, rotation.Roll));
@@ -68,9 +69,9 @@ void UCustomMovementComponent::HandleCamera()
 
 void UCustomMovementComponent::Move(FVector moveDelta)
 {
-//	FHitResult hitResult(1.f);
+	//	FHitResult hitResult(1.f);
 	FHitResult* hitResult = new FHitResult();
-	
+
 
 	//this->SafeMoveUpdatedComponent(moveDelta, FQuat::Identity, false, hitResult);
 	actor->SetActorLocation(actor->GetActorLocation() + moveDelta, true, hitResult);
@@ -90,17 +91,30 @@ void UCustomMovementComponent::ApplyGravity()
 	Move(gravityVector);
 }
 
-void UCustomMovementComponent::UnstuckTimer()
+void UCustomMovementComponent::UnstuckTimer(float DeltaTime)
 {
-	
+	if(!canUnstuck)
+	{
+		unstuckTimer += DeltaTime;
+
+		if (unstuckTimer >= unstuckInterval)
+		{
+			canUnstuck = true;
+		}
+	}
 }
 
 
 void UCustomMovementComponent::Unstuck()
 {
-	if(canUnstuck)
+	UE_LOG(LogTemp, Display, TEXT("1"));
+	if (canUnstuck)
 	{
+		UE_LOG(LogTemp, Display, TEXT("%s"), *unstuckDisplacement.ToString());
 		FHitResult* hitResult = new FHitResult();
-		actor->SetActorLocation(actor->GetActorLocation() + unstuckDisplacement, true, hitResult, ETeleportType::TeleportPhysics);
+		actor->SetActorLocation(actor->GetActorLocation() + unstuckDisplacement, false, hitResult,
+		                        ETeleportType::TeleportPhysics);
+		canUnstuck = false;
+		unstuckTimer = 0;
 	}
 }

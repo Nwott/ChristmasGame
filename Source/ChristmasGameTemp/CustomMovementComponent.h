@@ -41,7 +41,7 @@ protected:
 	float unstuckTimer;
 	bool canUnstuck = true;
 
-	void UnstuckTimer();
+	void UnstuckTimer(float DeltaTime);
 
 	UFUNCTION(BlueprintCallable, Category="Unstuck")	
 	void Unstuck();
