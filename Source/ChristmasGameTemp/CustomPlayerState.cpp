@@ -6,6 +6,7 @@
 #include "PlayerHUD.h"
 #include "PlayerHUDController.h"
 #include "Math/UnrealMathUtility.h"
+#include "Kismet/GameplayStatics.h"
 
 void ACustomPlayerState::CalculateTimeElapsed(float DeltaTime)
 {
@@ -46,6 +47,7 @@ void ACustomPlayerState::EndGame()
 	UEndScreenController* end = hud->MakeEndScreen(endScreen);
 	TTuple<float, int> scoreTuple = FormatScore();
 	end->UpdateScore(scoreTuple.Get<0>(), scoreTuple.Get<1>());
+	UGameplayStatics::SetGamePaused(GetWorld(), true);
 }
 
 void ACustomPlayerState::UpdatePresents(int delta)
