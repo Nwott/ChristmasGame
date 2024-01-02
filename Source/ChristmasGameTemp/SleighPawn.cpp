@@ -3,9 +3,7 @@
 
 #include "SleighPawn.h"
 #include "Kismet/GameplayStatics.h"
-#include "Field/FieldSystemComponent.h"
 #include "ThirdPersonCharacter.h"
-#include "House.h"
 
 // Sets default values
 ASleighPawn::ASleighPawn()
@@ -55,7 +53,6 @@ void ASleighPawn::OnPlayerPresentPickupEnter(AActor* actor)
 	if (IsPlayer(actor))
 	{
 		player->SetInPickupRange(true);
-		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Entered present pickup collision."));
 	}
 }
 
@@ -64,7 +61,6 @@ void ASleighPawn::OnPlayerPresentPickupExit(AActor* actor)
 	if (IsPlayer(actor))
 	{
 		player->SetInPickupRange(false);
-		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Left present pickup collision."));
 	}
 }
 

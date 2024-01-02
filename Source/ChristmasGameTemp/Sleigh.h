@@ -38,6 +38,9 @@ protected:
 	UFUNCTION(BlueprintCallable, Category="Sleigh")
 	void OnPlayerPresentPickupLeave(AActor* actor);
 
+	UPROPERTY(EditDefaultsOnly, Category="Sleigh")
+	TArray<TSubclassOf<APresent>> presentsToSpawn;
+
 	bool IsPlayer(AActor* actor);
 
 public:	

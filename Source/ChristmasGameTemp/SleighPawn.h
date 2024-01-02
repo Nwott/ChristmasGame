@@ -32,6 +32,7 @@ protected:
 	UFUNCTION(BlueprintCallable, Category="Sleigh")
 	virtual void OnPlayerPresentPickupExit(AActor* actor);
 
+
 	bool IsPlayer(AActor* actor);
 
 	AThirdPersonCharacter* player;

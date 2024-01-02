@@ -57,6 +57,9 @@ protected:
 	UFUNCTION(BlueprintCallable, Category="Present")
 	TArray<APresent*> CheckForPresents();
 
+	UPROPERTY(EditDefaultsOnly, Category="Present")
+	TArray<TSubclassOf<APresent>> presentsToSpawn;
+	
 	APresent* GetClosestPresent(TArray<APresent*>);
 
 	void PickupClosestPresent(APresent* present);

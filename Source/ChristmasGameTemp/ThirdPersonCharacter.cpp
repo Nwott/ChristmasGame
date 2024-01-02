@@ -132,14 +132,20 @@ void AThirdPersonCharacter::OnPressInteract()
 
 void AThirdPersonCharacter::GetPresent()
 {
+	// if there are no presents to spawn, then dont do anything
+	if(presentsToSpawn.Num() <= 0) return;
+	
 	if (inPickupRange)
 	{
+		// choose present to spawn
+		const TSubclassOf<APresent> presentSpawn = presentsToSpawn[FMath::RandRange(0, presentsToSpawn.Num() - 1)];
+
 		// get present location component position from thirdpersonplayer blueprint
-		UStaticMeshComponent* presentLocation = this->FindComponentByTag<UStaticMeshComponent>("PresentLocation");
+		const UStaticMeshComponent* presentLocation = this->FindComponentByTag<UStaticMeshComponent>("PresentLocation");
 		const FVector position = presentLocation->GetComponentLocation();
 
 		// spawn present at position
-		APresent* present = GetWorld()->SpawnActor<APresent>(presentToSpawn, position, FRotator::ZeroRotator);
+		APresent* present = GetWorld()->SpawnActor<APresent>(presentSpawn, position, FRotator::ZeroRotator);
 
 		present->AttachToActor(this, FAttachmentTransformRules::KeepWorldTransform);
 		currPresent = present;
