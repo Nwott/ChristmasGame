@@ -109,20 +109,7 @@ void AThirdPersonCharacter::OnPressInteract()
 {
 	if (currPresent == NULL)
 	{
-		if (inPickupRange)
-		{
-			GetPresent();
-		}
-		else
-		{
-			TArray<APresent*> presents = CheckForPresents();
-			APresent* closestPresent = GetClosestPresent(presents);
-
-			if (closestPresent != NULL)
-			{
-				PickupClosestPresent(closestPresent);
-			}
-		}
+		GetPresent();
 	}
 	else
 	{

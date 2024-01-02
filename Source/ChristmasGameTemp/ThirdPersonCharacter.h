@@ -43,9 +43,6 @@ protected:
 	void GetPresent();
 	void DropPresent();
 
-	UPROPERTY(EditAnywhere)
-	TSubclassOf<class APresent> presentToSpawn;
-
 	UFUNCTION(BlueprintCallable, Category="Sleigh")
 	void OnPressInteract();
 
