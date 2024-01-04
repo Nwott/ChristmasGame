@@ -52,12 +52,12 @@ void ASleighPawn::OnPlayerExit()
 
 void ASleighPawn::ShowOutline()
 {
-	pickupOutline->SetVisibility(true);	
+	pickupOutline->SetVisibility(true, true);	
 }
 
 void ASleighPawn::HideOutline()
 {
-	pickupOutline->SetVisibility(false);	
+	pickupOutline->SetVisibility(false, true);	
 }
 
 
