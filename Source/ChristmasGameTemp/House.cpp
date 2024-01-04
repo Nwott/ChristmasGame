@@ -85,6 +85,12 @@ void AHouse::OnPresentColliderEnter(AActor* otherActor)
 		presentsInHouse.Add(otherActor);
 		SetPresents(presents + 1);
 		playerState->UpdatePresents(1);
+
+		if(presents == totalPresents)
+		{
+			// call all presents placed event in blueprint
+			OnPlaceAllPresents();
+		}
 	}
 
 }

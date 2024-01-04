@@ -58,6 +58,9 @@ protected:
 	void SetTotalPresents(int value);
 	void UpdatePresentWidget(FString text);
 
+	UFUNCTION(BlueprintImplementableEvent)
+	void OnPlaceAllPresents();
+
 public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
