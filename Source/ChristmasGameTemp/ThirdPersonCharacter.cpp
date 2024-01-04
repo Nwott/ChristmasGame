@@ -82,7 +82,6 @@ void AThirdPersonCharacter::PossessSleigh()
 	// disable collision for player so it doesnt collide while inside sleigh
 	Super::SetActorEnableCollision(false);
 
-
 	// attach player to sleigh
 	// similar to setting transform.parent in unity
 	Super::AttachToActor(actor, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
