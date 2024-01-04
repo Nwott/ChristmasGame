@@ -32,6 +32,7 @@ protected:
 	UFUNCTION(BlueprintCallable, Category="Sleigh")
 	virtual void OnPlayerPresentPickupExit(AActor* actor);
 
+	UStaticMeshComponent* pickupOutline;
 
 	bool IsPlayer(AActor* actor);
 
@@ -48,4 +49,7 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 	FVector GetPlayerLocation();
+
+	void ShowOutline();
+	void HideOutline();
 };

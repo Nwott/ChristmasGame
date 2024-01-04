@@ -74,6 +74,9 @@ void AThirdPersonCharacter::PossessSleigh()
 	AActor* actor = actors[0];
 	ASleighPawn* sleigh = (ASleighPawn*)actor;
 
+	// hide present pickup outline
+	sleigh->HideOutline();
+
 	playerController->Possess((APawn*)actor);
 
 	// disable collision for player so it doesnt collide while inside sleigh

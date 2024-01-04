@@ -19,6 +19,7 @@ void ASleighPawn::BeginPlay()
 	movement = this->FindComponentByClass<UCustomMovementComponent>();
 	player = (AThirdPersonCharacter*)UGameplayStatics::GetActorOfClass(GetWorld(), AThirdPersonCharacter::StaticClass());
 	playerLocation = this->FindComponentByTag<USceneComponent>("PlayerLocation");
+	pickupOutline = this->FindComponentByTag<UStaticMeshComponent>("PickupOutline");
 }
 
 // Called every frame
@@ -46,7 +47,19 @@ void ASleighPawn::OnPlayerExit()
 
 	player->OnExitSleigh();
 	player->SetInSleigh(false);
+	ShowOutline();
 }
+
+void ASleighPawn::ShowOutline()
+{
+	pickupOutline->SetVisibility(true);	
+}
+
+void ASleighPawn::HideOutline()
+{
+	pickupOutline->SetVisibility(false);	
+}
+
 
 void ASleighPawn::OnPlayerPresentPickupEnter(AActor* actor)
 {
