@@ -138,6 +138,9 @@ void AThirdPersonCharacter::GetPresent()
 
 		present->AttachToActor(this, FAttachmentTransformRules::KeepWorldTransform);
 		currPresent = present;
+
+		// call event in blueprint
+		OnGetPresent();
 	}
 }
 

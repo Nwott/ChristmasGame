@@ -61,6 +61,9 @@ protected:
 
 	void PickupClosestPresent(APresent* present);
 
+	UFUNCTION(BlueprintImplementableEvent)
+	void OnGetPresent();
+
 public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
