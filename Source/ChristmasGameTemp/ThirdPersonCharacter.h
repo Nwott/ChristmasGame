@@ -38,6 +38,7 @@ protected:
 	UPROPERTY(BlueprintReadOnly, Category="Sleigh")
 	APlayerController* playerController;
 
+	UPROPERTY(BlueprintReadOnly, Category="Sleigh")
 	bool inSleigh;
 
 	void GetPresent();
@@ -63,7 +64,7 @@ protected:
 
 	UFUNCTION(BlueprintImplementableEvent)
 	void OnGetPresent();
-
+	
 public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
