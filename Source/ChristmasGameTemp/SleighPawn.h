@@ -7,6 +7,7 @@
 #include "ThirdPersonCharacter.h"
 #include "Field/FieldSystemComponent.h"
 #include "CustomMovementComponent.h"
+#include "PlayerHUDController.h"
 #include "SleighPawn.generated.h"
 
 UCLASS()
@@ -40,6 +41,11 @@ protected:
 
 	// where player sits in sleigh
 	USceneComponent* playerLocation;
+
+	APlayerHUDController* hud;
+
+	UFUNCTION(BlueprintCallable, Category="HUD")
+	void SetPlayerHUD(APlayerHUDController* initHUD);
 
 public:
 	// Called every frame

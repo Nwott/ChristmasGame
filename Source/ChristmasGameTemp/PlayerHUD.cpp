@@ -3,6 +3,8 @@
 
 #include "PlayerHUD.h"
 
+#include "Components/CanvasPanel.h"
+
 void UPlayerHUD::UpdateTimeElapsed(FString text)
 {
 	if (TimeElapsedTextBlock)
@@ -26,5 +28,18 @@ void UPlayerHUD::UpdatePresentsLeft(FString text)
 		PresentsLeftTextBlock->SetText(FText::FromString(text));
 	}
 }
+
+void UPlayerHUD::ChangeFKeyVisibility(bool visible)
+{
+	if(visible)
+	{
+		CVFKey->SetVisibility(ESlateVisibility::HitTestInvisible);
+	}
+	else
+	{
+		CVFKey->SetVisibility(ESlateVisibility::Hidden);	
+	}
+}
+
 
 

@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "EndScreenController.h"
+#include "PlayerHUD.h"
 #include "GameFramework/Character.h"
 #include "ThirdPersonCharacter.generated.h"
 

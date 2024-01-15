@@ -66,6 +66,11 @@ void ASleighPawn::OnPlayerPresentPickupEnter(AActor* actor)
 	if (IsPlayer(actor))
 	{
 		player->SetInPickupRange(true);
+
+		if(hud)
+		{
+			hud->GetHUD()->ChangeFKeyVisibility(true);
+		}
 	}
 }
 
@@ -74,6 +79,11 @@ void ASleighPawn::OnPlayerPresentPickupExit(AActor* actor)
 	if (IsPlayer(actor))
 	{
 		player->SetInPickupRange(false);
+	}
+	
+	if(hud)
+	{
+		hud->GetHUD()->ChangeFKeyVisibility(false);
 	}
 }
 
@@ -90,4 +100,9 @@ bool ASleighPawn::IsPlayer(AActor* actor)
 	{
 		return false;
 	}
+}
+
+void ASleighPawn::SetPlayerHUD(APlayerHUDController* initHUD)
+{
+	hud = initHUD;
 }

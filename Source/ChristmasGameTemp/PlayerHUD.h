@@ -25,8 +25,13 @@ protected:
 	UPROPERTY(BlueprintReadOnly, meta = (BindWidget))
 	class UTextBlock* PresentsLeftTextBlock;
 
+	UPROPERTY(BlueprintReadOnly, meta = (BindWidget))
+	class UCanvasPanel* CVFKey;
+
 public:
 	void UpdateTimeElapsed(FString text);
 	void UpdatePresentsDelivered(FString text);
 	void UpdatePresentsLeft(FString text);
+
+	void ChangeFKeyVisibility(bool visible);
 };
