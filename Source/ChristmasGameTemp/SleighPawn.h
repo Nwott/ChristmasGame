@@ -5,7 +5,6 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
 #include "ThirdPersonCharacter.h"
-#include "Field/FieldSystemComponent.h"
 #include "CustomMovementComponent.h"
 #include "PlayerHUDController.h"
 #include "SleighPawn.generated.h"
